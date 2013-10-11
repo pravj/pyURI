@@ -2,7 +2,7 @@
 # still working 
 
 import re
-
+from update import update
 
 class URI:
 
@@ -142,6 +142,24 @@ class URI:
 			# who will handle error...me
 			else:
 				pass
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	""""""							'update' the existing values or 'add' or 'delete' them					 """"""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	def update(self,key,value=None):
+		uri_backup = self.uri
+		Data = self.data
+		
+		result = update(key,value,Data)
+		try:
+			self.__init__(result)
+			#print result
+		except:
+			self.uri = uri_backup
+			self.data = Data
+			raise Exception("syntax error in updating '%s' key"%(key))
 				
 				
 
